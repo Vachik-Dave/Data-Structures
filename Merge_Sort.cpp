@@ -1,3 +1,9 @@
+/*
+This is simple mergesort program where, first split is done in main().
+
+Created By: Vachik Dave
+*/
+
 #include <iostream>
 #include <vector>
 //#include <algorithm>

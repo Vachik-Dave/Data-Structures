@@ -1,8 +1,9 @@
 /*
-This is simple link list program with basic operations such as insertion (from front), deletion (from front) and travarsal.
+This is circular link list program with basic operations such as insertion (from front), deletion (from front) and travarsal.
 
 Created By: Vachik Dave
 */
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -23,7 +24,7 @@ int main()
 	int i;
 	ll *head = NULL;
 		
-	for(i=0;i<=4;i++){
+	for(i=0;i<=10;i++){
 		head = insert_front(head,i);
 	}
 	//printf("hi");
@@ -34,6 +35,7 @@ int main()
 		head = delete_front(head);
 	}
 	traverse(head);
+
 	printf("\n");
 
 
@@ -41,36 +43,45 @@ int main()
 }
 
 ll* insert_front(ll* head,int i){
-	ll *n;
+	ll *n,*t;
+	t = head;
 	n = malloc(sizeof(ll));
-	n->value = i*2;
+	n->value = i;
 	if (head == NULL){
-		n->ptr = NULL;
+		n->ptr = n;
 		head = n;
 		return head;
 	}
 	n->ptr = head;
+	t = t->ptr;
+	while(t->ptr != head){
+		t = t->ptr;			
+	}
+	t->ptr = n;
 	head = n;
-
 	return head;
 }
 
 ll* delete_front(ll* head){
 	
-	ll *ptr;
+	ll *ptr,*t;
 	if(head == NULL)
 	{
 		printf("empty, cannot delete");
 		return head;
 	}
-	if (head->ptr == NULL){
+	if (head->ptr == head){
 		free(head);	
 		head = NULL;
 		return head;
 	}
-	ptr = head;
-	head= head->ptr;
-	free(ptr);
+	t = head;
+	while(t->ptr != head){
+		t = t->ptr;			
+	}
+	t->ptr = head->ptr;
+	free(head);
+	head = t->ptr;
 	return head;
 }
 
@@ -81,9 +92,12 @@ int traverse(ll* head){
 	t = head;
 	if(head == NULL)
 		printf("empty \n");
-	while(t != NULL){
+	printf("%d-",t->value);
+	t = t->ptr;
+	while(t != head){
 		printf("%d-",t->value);
 		t = t->ptr;
+				
 	}
 	return 0;
 }
