@@ -3,7 +3,7 @@ This is simple binary search tree program with basic operations such as insertio
 
 Here, I added sucessor of current node is maintained as a part of tree_node structure. All operations on the BST support to maintain this sucessor value.
 
-Created By: Vachik Dave
+Author: Vachik Dave
 */
 
 
